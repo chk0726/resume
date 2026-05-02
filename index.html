@@ -11,45 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    .slider{
-  position:relative;
-  width:340px;
-  height:340px;
-}
 
-.slide{
-  position:absolute;
-
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  border-radius:30px;
-
-  opacity:0;
-
-  transition:1s ease-in-out;
-
-  border:2px solid rgba(77,163,255,0.4);
-
-  box-shadow:
-    0 0 25px rgba(77,163,255,0.35),
-    0 0 80px rgba(77,163,255,0.15);
-}
-
-.slide.active{
-  opacity:1;
-}
-
-.slide:hover{
-
-  transform:scale(1.03);
-
-  box-shadow:
-    0 0 35px rgba(77,163,255,0.55),
-    0 0 100px rgba(77,163,255,0.25);
-}
     *{
       margin:0;
       padding:0;
@@ -89,6 +51,7 @@
       z-index:-1;
     }
 
+    /* Navbar */
     nav{
       width:100%;
       padding:25px 10%;
@@ -101,6 +64,7 @@
       background:rgba(0,0,0,0.2);
       border-bottom:1px solid rgba(255,255,255,0.05);
       z-index:100;
+      box-shadow:0 5px 30px rgba(0,0,0,0.25);
     }
 
     nav h2{
@@ -125,6 +89,7 @@
       color:#4da3ff;
     }
 
+    /* Hero */
     .hero{
       min-height:100vh;
       display:flex;
@@ -136,6 +101,7 @@
 
     .hero-text{
       flex:1;
+      animation:fadeUp 1s ease;
     }
 
     .hero-text h1{
@@ -155,6 +121,19 @@
       margin-bottom:35px;
     }
 
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* Buttons */
     .buttons{
       display:flex;
       gap:20px;
@@ -188,21 +167,47 @@
       color:white;
     }
 
+    /* Hero Image */
     .hero-image{
       flex:1;
       display:flex;
       justify-content:center;
     }
 
-    .hero-image img{
+    .slider{
+      position:relative;
       width:340px;
       height:340px;
-      object-fit:cover;
-      border-radius:30px;
-      border:2px solid rgba(255,255,255,0.1);
-      box-shadow:0 20px 50px rgba(0,0,0,0.5);
     }
 
+    .slide{
+      position:absolute;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:30px;
+      opacity:0;
+      transition:1s ease-in-out;
+      border:2px solid rgba(77,163,255,0.4);
+
+      box-shadow:
+        0 0 25px rgba(77,163,255,0.35),
+        0 0 80px rgba(77,163,255,0.15);
+    }
+
+    .slide.active{
+      opacity:1;
+    }
+
+    .slide:hover{
+      transform:scale(1.03);
+
+      box-shadow:
+        0 0 35px rgba(77,163,255,0.55),
+        0 0 100px rgba(77,163,255,0.25);
+    }
+
+    /* Sections */
     section{
       padding:100px 10%;
     }
@@ -225,6 +230,7 @@
       border-radius:10px;
     }
 
+    /* Cards */
     .cards{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -232,12 +238,12 @@
     }
 
     .card{
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.05);
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
       border-radius:24px;
       padding:30px;
-      transition:0.3s;
-      backdrop-filter:blur(10px);
+      transition:0.35s;
+      backdrop-filter:blur(14px);
     }
 
     .card:hover{
@@ -256,6 +262,7 @@
       line-height:1.7;
     }
 
+    /* Skills */
     .skills{
       display:flex;
       flex-wrap:wrap;
@@ -275,6 +282,7 @@
       transform:scale(1.05);
     }
 
+    /* Contact */
     .contact-box{
       background:rgba(255,255,255,0.04);
       padding:40px;
@@ -287,6 +295,7 @@
       color:#ccc;
     }
 
+    /* Footer */
     footer{
       text-align:center;
       padding:40px;
@@ -294,6 +303,7 @@
       border-top:1px solid rgba(255,255,255,0.05);
     }
 
+    /* Responsive */
     @media(max-width:900px){
 
       .hero{
@@ -315,28 +325,18 @@
         flex-direction:column;
         gap:20px;
       }
+
+      .slider{
+        width:280px;
+        height:280px;
+      }
     }
 
   </style>
 </head>
+
 <body>
-<script>
 
-const slides = document.querySelectorAll('.slide');
-
-let index = 0;
-
-setInterval(() => {
-
-  slides[index].classList.remove('active');
-
-  index = (index + 1) % slides.length;
-
-  slides[index].classList.add('active');
-
-}, 3000);
-
-</script>
   <!-- Navbar -->
   <nav>
     <h2>HongKai.dev</h2>
@@ -353,6 +353,7 @@ setInterval(() => {
   <section class="hero">
 
     <div class="hero-text">
+
       <h1>
         Hi, I'm <span>陳鴻凱</span><br>
         Java Developer
@@ -368,23 +369,25 @@ setInterval(() => {
         <a href="#projects" class="btn primary">查看作品</a>
         <a href="#contact" class="btn secondary">聯絡我</a>
       </div>
+
     </div>
-    
-<div class="hero-image">
 
-  <div class="slider">
+    <!-- 輪播照片 -->
+    <div class="hero-image">
 
-    <img src="chkphoto.jpg" class="slide active" alt="照片1">
+      <div class="slider">
 
-    <img src="chkphoto2.jpg" class="slide" alt="照片2">
+        <img src="chkphoto.jpg" class="slide active" alt="照片1">
 
-    <img src="chkphoto3.jpg" class="slide" alt="照片3">
+        <img src="chkphoto2.jpg" class="slide" alt="照片2">
 
-    <img src="chkphoto4.jpg" class="slide" alt="照片4">
+        <img src="chkphoto3.jpg" class="slide" alt="照片3">
 
-  </div>
+        <img src="chkphoto4.jpg" class="slide" alt="照片4">
 
-</div>
+      </div>
+
+    </div>
 
   </section>
 
@@ -397,6 +400,7 @@ setInterval(() => {
 
       <div class="card">
         <h3>🎓 學歷</h3>
+
         <p>
           逢甲大學 統計學系<br>
           擁有數據分析與邏輯思考基礎。
@@ -405,6 +409,7 @@ setInterval(() => {
 
       <div class="card">
         <h3>💼 工作經驗</h3>
+
         <p>
           曾任南山人壽保險業務與石二鍋餐飲服務，
           具備良好溝通能力與團隊合作能力。
@@ -413,6 +418,7 @@ setInterval(() => {
 
       <div class="card">
         <h3>🚀 目前目標</h3>
+
         <p>
           持續學習 Java、資料結構與後端技術，
           朝軟體工程師方向發展。
@@ -429,11 +435,21 @@ setInterval(() => {
     <h2 class="section-title">Skills</h2>
 
     <div class="skills">
+
       <div class="skill">Java</div>
+
       <div class="skill">GitHub</div>
+
+      <div class="skill">HTML</div>
+
+      <div class="skill">CSS</div>
+
       <div class="skill">Word</div>
+
       <div class="skill">Excel</div>
+
       <div class="skill">PowerPoint</div>
+
     </div>
 
   </section>
@@ -447,6 +463,7 @@ setInterval(() => {
 
       <div class="card">
         <h3>💻 Java 練習專案</h3>
+
         <p>
           使用 Java 製作基本功能程式，
           持續練習物件導向與程式邏輯。
@@ -455,6 +472,7 @@ setInterval(() => {
 
       <div class="card">
         <h3>🌐 個人網站</h3>
+
         <p>
           使用 HTML + CSS 建立個人作品集網站，
           練習前端版面設計與 RWD 響應式設計。
@@ -463,6 +481,7 @@ setInterval(() => {
 
       <div class="card">
         <h3>📊 統計分析</h3>
+
         <p>
           結合統計背景與資料分析能力，
           未來規劃開發資料分析相關專案。
@@ -479,11 +498,15 @@ setInterval(() => {
     <h2 class="section-title">Contact</h2>
 
     <div class="contact-box">
+
       <p>📞 0906-338-721</p>
+
       <p>📧 a0906338721@gmail.com</p>
+
       <p>📍 Taiwan</p>
 
       <div class="buttons" style="margin-top:25px;">
+
         <a href="mailto:a0906338721@gmail.com" class="btn primary">
           Email Me
         </a>
@@ -491,14 +514,36 @@ setInterval(() => {
         <a href="https://github.com/" target="_blank" class="btn secondary">
           GitHub
         </a>
+
       </div>
+
     </div>
 
   </section>
 
+  <!-- Footer -->
   <footer>
     © 2026 HongKai Developer Portfolio
   </footer>
+
+  <!-- 輪播 JS -->
+  <script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let index = 0;
+
+    setInterval(() => {
+
+      slides[index].classList.remove('active');
+
+      index = (index + 1) % slides.length;
+
+      slides[index].classList.add('active');
+
+    }, 3000);
+
+  </script>
 
 </body>
 </html>
